@@ -8038,6 +8038,7 @@ std::vector<wallet2::pending_tx> wallet2::create_transactions_2(std::vector<cryp
       cryptonote::transaction test_tx;
       pending_tx test_ptx;
 
+      THROW_WALLET_EXCEPTION_IF(tx.dsts.empty(), error::wallet_internal_error, "Ring size or tx extra size is too big");
       if (!use_rct && !dsts.empty() && tx.dsts.back().amount > ::config::BASE_REWARD_CLAMP_THRESHOLD)
       {
         // when the payment gets split, ensure that the partially paid amount doesn't have excessively small denominations
